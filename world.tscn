@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bipvi636nhukj"]
+
+[ext_resource type="Texture2D" uid="uid://bd6qyiw3vx2p1" path="res://assets/Placeholders-32x32-2.png" id="1_i6hea"]
+[ext_resource type="Texture2D" uid="uid://bwf4glsebewex" path="res://assets/Placeholders-32x32-27.png" id="1_wipqm"]
+[ext_resource type="Texture2D" uid="uid://wyke0ynloj7n" path="res://assets/Placeholders-32x32-11.png" id="2_ppl1k"]
+[ext_resource type="Script" path="res://launcher.gd" id="2_xn8o8"]
+[ext_resource type="PackedScene" uid="uid://dfaxytlllujgq" path="res://rocket.tscn" id="4_ujspe"]
+[ext_resource type="Script" path="res://target.gd" id="5_dhktq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n8uau"]
+
+[node name="Main" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Background" type="TextureRect" parent="World"]
+modulate = Color(1, 1, 1, 0.12549)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_wipqm")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Launcher" type="Node2D" parent="World" node_paths=PackedStringArray("_target")]
+position = Vector2(16, 16)
+script = ExtResource("2_xn8o8")
+_rocket_scene = ExtResource("4_ujspe")
+_target = NodePath("../Target")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Launcher"]
+texture = ExtResource("1_i6hea")
+
+[node name="Timer" type="Timer" parent="World/Launcher"]
+wait_time = 3.0
+autostart = true
+
+[node name="Target" type="Node2D" parent="World"]
+position = Vector2(285, 79)
+script = ExtResource("5_dhktq")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Target"]
+texture = ExtResource("2_ppl1k")
+
+[node name="Area2D" type="Area2D" parent="World/Target"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Target/Area2D"]
+shape = SubResource("CircleShape2D_n8uau")
+
+[connection signal="timeout" from="World/Launcher/Timer" to="World/Launcher" method="_on_timer_timeout"]

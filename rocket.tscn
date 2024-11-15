@@ -1,0 +1,154 @@
+[gd_scene load_steps=21 format=3 uid="uid://dfaxytlllujgq"]
+
+[ext_resource type="Script" path="res://rocket.gd" id="1_amm1f"]
+[ext_resource type="Texture2D" uid="uid://doq7ggxb8k8w0" path="res://assets/rocket.png" id="1_urbgq"]
+[ext_resource type="Texture2D" uid="uid://8m03uug7v6fv" path="res://assets/smoke-fade-1.png" id="3_5gl2e"]
+[ext_resource type="Texture2D" uid="uid://balwplr01u47m" path="res://assets/smoke-fade-2.png" id="4_25kii"]
+[ext_resource type="Texture2D" uid="uid://yb5dfr3u8kea" path="res://assets/smoke-fade-11.png" id="5_derge"]
+[ext_resource type="Texture2D" uid="uid://f6t5fmx3n2ob" path="res://assets/smoke-fade-3.png" id="11_5u1of"]
+[ext_resource type="Texture2D" uid="uid://xdmhjfwxr8tx" path="res://assets/smoke-fade-4.png" id="12_0kw04"]
+[ext_resource type="Texture2D" uid="uid://de5sat3uumb3m" path="res://assets/smoke-fade-5.png" id="13_qx4lx"]
+[ext_resource type="Texture2D" uid="uid://casi6xad5bhwh" path="res://assets/smoke-fade-6.png" id="14_gql2w"]
+[ext_resource type="Texture2D" uid="uid://dsqpts3a3t62n" path="res://assets/smoke-fade-7.png" id="15_1slm7"]
+[ext_resource type="Texture2D" uid="uid://e5sp74xtktut" path="res://assets/smoke-fade-8.png" id="16_nms6d"]
+[ext_resource type="Texture2D" uid="uid://shkwrtqlc8x1" path="res://assets/smoke-fade-9.png" id="17_paity"]
+[ext_resource type="Texture2D" uid="uid://b83305ljmk5nr" path="res://assets/smoke-fade-10.png" id="18_gbp33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67gtv"]
+size = Vector2(16, 4)
+
+[sub_resource type="Curve" id="Curve_v8set"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 5.6, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_yr4qq"]
+offsets = PackedFloat32Array(0, 0.0866667, 0.546667, 1)
+colors = PackedColorArray(1, 1, 0.843137, 1, 1, 1, 1, 1, 0.996078, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_d14rs"]
+frames = 11
+one_shot = true
+frame_0/texture = ExtResource("3_5gl2e")
+frame_1/texture = ExtResource("4_25kii")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("11_5u1of")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("12_0kw04")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("13_qx4lx")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("14_gql2w")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("15_1slm7")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("16_nms6d")
+frame_7/duration = 0.1
+frame_8/texture = ExtResource("17_paity")
+frame_8/duration = 0.1
+frame_9/texture = ExtResource("18_gbp33")
+frame_9/duration = 0.1
+frame_10/texture = ExtResource("5_derge")
+frame_10/duration = 0.1
+
+[sub_resource type="Curve" id="Curve_tpp1u"]
+max_value = 1.01
+_data = [Vector2(0, 0.505), 0.0, 0.0, 0, 1, Vector2(1, 0.505), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_fvtjj"]
+offsets = PackedFloat32Array(0.0533333, 0.16, 0.28, 0.406667, 0.62, 0.973333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.972549, 0.607843, 1, 0.837482, 0.311921, 0, 1, 1, 0, 0, 1, 0.458824, 0.458824, 0.529412, 1, 0.458824, 0.458824, 0.529412, 0)
+
+[sub_resource type="Gradient" id="Gradient_ggbov"]
+offsets = PackedFloat32Array(0, 0.0329308, 0.0570801, 0.0878156, 0.60166, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.972549, 0.607843, 1, 0.837482, 0.311921, 0, 1, 0.299547, 0.299547, 0.299547, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="Rocket" type="Node2D"]
+script = ExtResource("1_amm1f")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_67gtv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_urbgq")
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-8, 0)
+emitting = false
+amount = 200
+lifetime = 2.0
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, -5)
+initial_velocity_max = 20.0
+linear_accel_min = -50.0
+linear_accel_max = -25.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_v8set")
+color = Color(1, 1, 0.94902, 1)
+color_ramp = SubResource("Gradient_yr4qq")
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+position = Vector2(5, 0)
+emitting = false
+amount = 64
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+lifetime_randomness = 0.1
+texture = SubResource("AnimatedTexture_d14rs")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(-1, 0)
+spread = 90.0
+gravity = Vector2(0, -5)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_tpp1u")
+color_ramp = SubResource("Gradient_fvtjj")
+
+[node name="FragmentsParticles" type="CPUParticles2D" parent="."]
+position = Vector2(5, 0)
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.4
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(-1, 0)
+spread = 90.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_ggbov")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
