@@ -18,12 +18,15 @@ func _physics_process(delta: float) -> void:
 	var target_direction: float = (_target.global_position - global_position).angle()
 	
 	if _active:
-		_angle = _angle.lerp(target_direction, delta)
-		target_direction = _angle.normalized()
-		rotation = _angle.angle()
+		var angle_dif = wrapf(target_direction - _angle, -PI, PI)
+		if abs(angle_dif) > PI:
+			angle_dif = sign(angle_dif) * PI
+
+		rotation += angle_dif * delta
+		_angle = rotation
 
 	else:
-		_angle = 4.71239
+		_angle = 1.57079637050629
 
 	position += SPEED * Vector2.from_angle(_angle) * delta
 
