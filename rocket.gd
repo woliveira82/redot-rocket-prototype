@@ -1,7 +1,10 @@
 extends Node2D
 
-const SPEED := 100.0
+const MAX_SPEED := 120.0
+const MANUVER_SPEED := 120.0
+const DOWN_ANGLE := 1.57079637050629
 
+var _speed := MAX_SPEED
 var _active := false
 var _target: Node2D
 var _angle: float = 0.0
@@ -19,6 +22,8 @@ func _physics_process(delta: float) -> void:
 	
 	if _active:
 		var angle_dif = wrapf(target_direction - _angle, -PI, PI)
+		_speed = MANUVER_SPEED if abs(angle_dif) > 1 else MAX_SPEED
+
 		if abs(angle_dif) > PI:
 			angle_dif = sign(angle_dif) * PI
 
@@ -26,9 +31,9 @@ func _physics_process(delta: float) -> void:
 		_angle = rotation
 
 	else:
-		_angle = 1.57079637050629
+		_angle = DOWN_ANGLE
 
-	position += SPEED * Vector2.from_angle(_angle) * delta
+	position += _speed * Vector2.from_angle(_angle) * delta
 
 
 func set_target(target: Node2D) -> void:
