@@ -24,8 +24,8 @@ frame_0/texture = ExtResource("3_5gl2e")
 
 [sub_resource type="Curve" id="Curve_tpp1u"]
 max_value = 1.01
-_data = [Vector2(0, 0.505), 0.0, 0.0, 0, 1, Vector2(1, 0.505), 0.0, 0.0, 1, 0]
-point_count = 2
+_data = [Vector2(0, 1.01), 0.0, 0.0, 0, 0, Vector2(0.104089, 0.386677), -27.0442, -27.0442, 0, 0, Vector2(0.137546, 0.195658), 2.70442, 2.70442, 0, 0, Vector2(0.996283, 1.01), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_fvtjj"]
 offsets = PackedFloat32Array(0.0533333, 0.16, 0.28, 0.406667, 0.62, 0.973333)
@@ -57,7 +57,8 @@ texture = ExtResource("3_5gl2e")
 direction = Vector2(-1, 0)
 spread = 0.0
 gravity = Vector2(0, -5)
-initial_velocity_max = 20.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
 linear_accel_min = -50.0
 linear_accel_max = -25.0
 angle_min = -90.0
